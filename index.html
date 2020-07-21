@@ -33,29 +33,29 @@
       <section id="main_content" class="inner">
         <h3>
 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-<p>We have done computation analysis in terms of complexities of our proposed models and its baseline models.
-The LSTM parameter’s complexity can be derived as follow:
+<p>We have done computation analysis in terms of complexities of our proposed models and its baseline models.<br>
+The LSTM parameter’s complexity can be derived as follow:<p>
 
-WLSTM = 4*I*H+4*H2+4H+H*K
+W<sub>LSTM</sub> = 4*I*H+4*H<sup>2</sup>+4H+H*K<p>
 
-where I, H, and K indicates the operations of input, hidden state, and output, respectively. We thus derive that a layer of BLSTM parameter’s complexity can be derived as:
+where I, H, and K indicates the operations of input, hidden state, and output, respectively. We thus derive that a layer of BLSTM parameter’s complexity can be derived as:<p>
 
-WBLSTM = 2*WLSTM
+W<sub>BLSTM</sub> = 2*W<sub>LSTM</sub><p>
 
-Since the BLSTM contains bi-lateral computation per input frame.
-The Fully-Connected Layer’s complexity can be derived as:
+Since the BLSTM contains bi-lateral computation per input frame.<br>
+The Fully-Connected Layer’s complexity can be derived as:<p>
 
-WFNN = I*HFNN+HFNN*K
+W<sub>FNN</sub> = I*H<sub>FNN</sub>+H<sub>FNN</sub>*K<p>
 
-The baseline single model is composed of 2 BLSTM layers connected to 1 time-distributed dense layer. Since the input and output sizes are fixed during inference time, the parameter’s complexities of BLSTM layers are bound by the number of its hidden cells, stated as H2. We can thus organize that a single component model of BLSTM of 2 layers with 300 memory cells each layer connected to a dense layer has a parameter complexity proportional to:    
+The baseline single model is composed of 2 BLSTM layers connected to 1 time-distributed dense layer. Since the input and output sizes are fixed during inference time, the parameter’s complexities of BLSTM layers are bound by the number of its hidden cells, stated as H<sup>2</sup>. We can thus organize that a single component model of BLSTM of 2 layers with 300 memory cells each layer connected to a dense layer has a parameter complexity proportional to:<p>    
 
-H2 + H2 + WFNN = 2H2 + WFNN = W
+H<sup>2</sup> + H<sup>2</sup> + W<sub>FNN</sub> = 2H<sup>2</sup> + W<sub>FNN</sub> = W<p>
 
-Furthermore, according to [1], the time complexity of BLSTM can be derived as:
+Furthermore, according to [1], the time complexity of BLSTM can be derived as:<p>
 
-O(W) = O((CH)2)
+O(W) = O((CH)<sup>2</sup>)<p>
 
-Compared to BLSTM, CNN can be much simplified in terms of hardware and computation costs. Therefore, we focus on the computation complexity of the BLSTM. Our DAEME-UAT of 2, 4, and 6 component models (300 memory cells in two BLSTM layers and 257 neurons in one dense layer) has W approximately proportional to 300 (C=1) when a parallel computation is applied. A single 6x wider BLSTM model (1800 memory cells in two BLSTM layers and 257 neurons in one dense layer) has W approximately proportional to 1800 (C=6). Therefore, the 6x wider model BLSTM requires much more time complexity compared to DAEME with paralleled small component models.
+Compared to BLSTM, CNN can be much simplified in terms of hardware and computation costs. Therefore, we focus on the computation complexity of the BLSTM. Our DAEME-UAT of 2, 4, and 6 component models (300 memory cells in two BLSTM layers and 257 neurons in one dense layer) has W approximately proportional to 300 (C=1) when a parallel computation is applied. A single 6x wider BLSTM model (1800 memory cells in two BLSTM layers and 257 neurons in one dense layer) has W approximately proportional to 1800 (C=6). Therefore, the 6x wider model BLSTM requires much more time complexity compared to DAEME with paralleled small component models.<br>
 </p>
 <h3>
       </section>
